@@ -15,36 +15,36 @@ import useAxios from 'axios-hooks'
 
 const dummyStatistics = [
   {
-    label: "Activity",
+    label: "Users",
     data: [
-      { label: "Unique viewers", value: 5742 },
-      { label: "Liked the movie", value: 5742 },
-      { label: "Used Personalization", value: 5742 },
+      { label: "Unique users", value: 432 },
+      { label: "Liked the movie", value: 678 },
+      { label: "Users used preference", value: 123 },
     ],
   },
   {
-    label: "Movie",
+    label: "Video",
     data: [
-      { label: "Watched with animal", value: 5742 },
-      { label: "Watched with predation", value: 5742 },
-      { label: "Original ending", value: 5742 },
+      { label: "Watched with Bird", value: 232 },
+      { label: "Watched with predation", value: 432 },
+      { label: "Watched with Bunny", value: 232 },
     ],
   },
   {
-    label: "Personalization",
+    label: "Preferences",
     data: [
-      { label: "Chose predation", value: 5742 },
-      { label: "Alternate ending", value: 5742 },
-      { label: "Original ending", value: 5742 },
-      { label: "Long intro", value: 5742 },
+      { label: "Short Intro", value: 455 },
+      { label: "Alternate ending", value: 555 },
+      { label: "Original ending", value: 323 },
+      { label: "Long intro", value: 122 },
     ],
   },
   {
     label: "Feedback",
     data: [
-      { label: "Neutral", value: 5742 },
-      { label: "Like", value: 5742 },
-      { label: "Dislike", value: 5742 },
+      { label: "Neutral", value: 431 },
+      { label: "Like", value: 143 },
+      { label: "Dislike", value: 321 },
     ],
   },
 ];
