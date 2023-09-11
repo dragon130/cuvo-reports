@@ -1,213 +1,246 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-import BarChart from "../../components/Charts/Bar";
-import BarChartStacked from "../../components/Charts/BarStacked";
+import ListIcon from "../../assets/images/list.svg";
+import QAIcon from "../../assets/images/qa.svg";
+import UsersIcon from "../../assets/images/users.svg";
+
 import LineChart from "../../components/Charts/Line";
 
 import PlaylistReport from "../../components/PlaylistReport";
 
-import useAxios from 'axios-hooks'
+import BarChart from "../../components/ApexCharts/Bar";
+import DonutChart from "../../components/ApexCharts/Donut";
+import ApexLineChart from "../../components/ApexCharts/Line";
 
+import useAxios from "axios-hooks";
 
-const dummyStatistics = [
-  {
-    label: "Users",
-    data: [
-      { label: "Unique users", value: 432 },
-      { label: "Liked the movie", value: 678 },
-      { label: "Users used preference", value: 123 },
-    ],
-  },
-  {
-    label: "Video",
-    data: [
-      { label: "Watched with Bird", value: 232 },
-      { label: "Watched with predation", value: 432 },
-      { label: "Watched with Bunny", value: 232 },
-    ],
-  },
-  {
-    label: "Preferences",
-    data: [
-      { label: "Short Intro", value: 455 },
-      { label: "Alternate ending", value: 555 },
-      { label: "Original ending", value: 323 },
-      { label: "Long intro", value: 122 },
-    ],
-  },
-  {
-    label: "Feedback",
-    data: [
-      { label: "Neutral", value: 431 },
-      { label: "Like", value: 143 },
-      { label: "Dislike", value: 321 },
-    ],
-  },
+const dummyData = [
+	{ label: "Total content personalization", value: "236", icon: ListIcon },
+	{ label: "Total User", value: "87", icon: ListIcon },
+	{ label: "Watched minutes", value: "3640.10", icon: QAIcon },
+
+	{ label: "Watched minutes", value: "3640.10", icon: UsersIcon, isAlt: true },
+	{ label: "Watched minutes", value: "3640.10", icon: UsersIcon, isAlt: true },
+	{ label: "Watched minutes", value: "3640.10", icon: UsersIcon, isAlt: true },
 ];
 
 const Overview = () => {
-  const [{ data: playlists, loading, error }] = useAxios(
-    'https://player.infusevideo.com/ibc/playlist.json'
-  )
+	const [{ data: playlists, loading, error }] = useAxios(
+		"https://player.infusevideo.com/ibc/playlist.json"
+	);
 
+	return (
+		<Grid container item xs={12}>
+			<Grid item xs={12}>
+				<Typography
+					sx={{
+						fontWeight: 700,
+						padding: "20px 0px",
+					}}
+				>
+					Personalization
+				</Typography>
+			</Grid>
+			<Grid container item xs={12} gap="10px" justifyContent="space-between">
+				{dummyData.map((data) => {
+					const { isAlt } = data;
+					return (
+						<Box
+							sx={{
+								border: "1px solid #DBDCE0",
+								padding: "15px",
+								flexBasis: "13.5%",
+								borderRadius: "8px",
+								minHeight: "100px",
+								display: "flex",
+								flexDirection: "column",
+								gap: "15px",
+								background: isAlt ? "#2858D3" : "transparent",
+								color: isAlt ? "#FFF" : "000",
+							}}
+						>
+							<Box
+								display="flex"
+								justifyContent="end"
+								sx={{
+									minHeight: "38px",
+								}}
+							>
+								<img src={data.icon} alt="icon" />
+							</Box>
+							<Box>
+								<Typography
+									sx={{
+										fontSize: "12px",
+									}}
+								>
+									{data.label}
+								</Typography>
+							</Box>
+							<Box>
+								<Typography
+									sx={{
+										fontSize: "24px",
+										fontWeight: 700,
+									}}
+								>
+									{data.value}
+								</Typography>
+							</Box>
+						</Box>
+					);
+				})}
+			</Grid>
 
-  return (
-    <Grid container item xs={12}>
-      <Grid item xs={12}>
-        <Typography
-          sx={{
-            color: "#fff",
-            fontSize: "30px",
-            fontWeight: 500,
-          }}
-        >
-          Dashboard
-        </Typography>
-        <Typography
-          sx={{
-            color: "#787878",
-          }}
-        >
-          Welcome back
-        </Typography>
-      </Grid>
-      {Array.isArray(playlists) && playlists.map(playlist => {
-        return (
-          <PlaylistReport playlist={playlist} />
-        )
-      })}
+			<Grid
+				container
+				item
+				xs={12}
+				mt="20px"
+				mb="20px"
+				justifyContent="space-between"
+			>
+				<Grid
+					item
+					md={6}
+					xs={12}
+					sx={{
+						flexBasis: "49%!important",
+					}}
+				>
+					<Box
+						sx={{
+							border: "1px solid #DBDCE0",
+							borderRadius: "8px",
+						}}
+					>
+						<Box
+							sx={{
+								borderRadius: "8px 8px 0 0",
+								background: "#DBDCE0",
+								padding: "10px 20px",
+							}}
+						>
+							<Typography
+								sx={{
+									fontWeight: 700,
+									fontSize: "14px",
+								}}
+							>
+								Top Picked Category
+							</Typography>
+						</Box>
+						<BarChart width="64%" />
+					</Box>
+				</Grid>
 
-      <Grid item xs={12} mt="50px">
-        {/* <BarChart /> */}
-      </Grid>
+				<Grid
+					item
+					md={6}
+					xs={12}
+					sx={{
+						flexBasis: "49%!important",
+					}}
+				>
+					<Box
+						sx={{
+							border: "1px solid #DBDCE0",
+							borderRadius: "8px",
+						}}
+					>
+						<Box
+							sx={{
+								borderRadius: "8px 8px 0 0",
+								background: "#DBDCE0",
+								padding: "10px 20px",
+							}}
+						>
+							<Typography
+								sx={{
+									fontWeight: 700,
+									fontSize: "14px",
+									textTransform: "uppercase",
+								}}
+							>
+								Personalisation
+							</Typography>
+						</Box>
+						<DonutChart width="60%" />
+					</Box>
+				</Grid>
+			</Grid>
 
-      <Grid item xs={12} mt="50px">
-        <Box>
-          <Typography
-            sx={{
-              color: "#fff",
-              fontSize: "18px",
-              fontWeight: 500,
-            }}
-          >
-            Statistics
-          </Typography>
-        </Box>
-        <Grid container item xs={12} mt="5px" justifyContent="space-between" flexWrap="wrap">
-          {dummyStatistics.map(stat => {
-            return (
-              <Box
-                display="flex"
-                flexWrap="wrap"
-                flexDirection="column"
-                flexBasis="22%"
-                sx={{
-                  background: "#343434",
-                  borderRadius: "4px",
-                  padding: "15px",
-                  color: "#fff",
-                }}
-              >
-                <Box display="flex">
-                  <Typography
-                    sx={{
-                      color: "#fff",
-                      fontWeight: 600,
-                    }}
-                  >
-                    {stat.label}
-                  </Typography>
-                </Box>
+			<Grid container item xs={12}>
+				<Grid item md={7} xs={12}>
+					<Box
+						sx={{
+							border: "1px solid #DBDCE0",
+							borderRadius: "8px",
+						}}
+					>
+						<Box
+							sx={{
+								borderRadius: "8px 8px 0 0",
+								background: "#DBDCE0",
+								padding: "10px 20px",
+							}}
+						>
+							<Typography
+								sx={{
+									fontWeight: 700,
+									fontSize: "14px",
+									textTransform: "uppercase",
+								}}
+							>
+								Personalisation
+							</Typography>
+						</Box>
+						<ApexLineChart width="600" />
+					</Box>
+				</Grid>
+			</Grid>
 
-                <Box display="flex" mt="15px" rowGap="15px" flexWrap="wrap">
-                  {stat.data.map(x => {
-                    return (
-                      <Box flexBasis="50%">
-                        <Typography sx={{
-                          fontWeight: 600,
-                        }}> {x.value}</Typography>
-                        <Typography sx={{
-                          color: "#b2b2b2",
-                          fontSize: "11px",
-                        }}>{x.label}</Typography>
-                      </Box>
-                    )
-                  })}
-                </Box>
-              </Box>
-            )
-          })}
-        </Grid>
-      </Grid>
+			<Grid container flexWrap="wrap" gap="10px">
+				{Array.isArray(playlists) &&
+					playlists.map((playlist) => {
+						return <PlaylistReport playlist={playlist} />;
+					})}
+			</Grid>
 
-      <Grid item xs={12} mt="50px">
-        <LineChart />
-      </Grid>
-
-      <Grid item xs={12} mt="50px">
-        <Box>
-          <Typography
-            sx={{
-              color: "#fff",
-              fontSize: "18px",
-              fontWeight: 500,
-            }}
-          >
-            Clips
-          </Typography>
-        </Box>
-        <Grid container item xs={12} mt="5px" justifyContent="space-between" flexWrap="wrap">
-          {dummyStatistics.map(stat => {
-            return (
-              <Box
-                display="flex"
-                flexWrap="wrap"
-                flexDirection="column"
-                flexBasis="22%"
-                sx={{
-                  background: "#343434",
-                  borderRadius: "4px",
-                  padding: "15px",
-                  color: "#fff",
-                }}
-              >
-                <Box display="flex">
-                  <Typography
-                    sx={{
-                      color: "#fff",
-                      fontWeight: 600,
-                    }}
-                  >
-                    {stat.label}
-                  </Typography>
-                </Box>
-
-                <Box display="flex" mt="15px" rowGap="15px" flexWrap="wrap">
-                  {stat.data.map(x => {
-                    return (
-                      <Box flexBasis="50%">
-                        <Typography sx={{
-                          fontWeight: 600,
-                        }}>{x.value}</Typography>
-                        <Typography sx={{
-                          color: "#b2b2b2",
-                          fontSize: "11px",
-                        }}> {x.label}</Typography>
-                      </Box>
-                    )
-                  })}
-                </Box>
-              </Box>
-            )
-          })}
-        </Grid>
-      </Grid>
-    </Grid>
-  );
+			<Grid item xs={12} mt="50px">
+				<Box
+					sx={{
+						border: "1px solid #DBDCE0",
+						borderRadius: "8px",
+					}}
+				>
+					<Box
+						sx={{
+							borderRadius: "8px 8px 0 0",
+							background: "#DBDCE0",
+							padding: "10px 20px",
+						}}
+					>
+						{" "}
+						<Typography
+							sx={{
+								fontWeight: 700,
+								fontSize: "14px",
+								textTransform: "uppercase",
+							}}
+						>
+							personalization watch vs non personalized
+						</Typography>
+					</Box>
+					<LineChart />
+				</Box>
+			</Grid>
+		</Grid>
+	);
 };
 
 export default Overview;

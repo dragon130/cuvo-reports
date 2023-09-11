@@ -6,50 +6,50 @@ import { Chart } from "react-charts";
 import { convertDataToChart } from "../../utils/helpers";
 
 export default function Bar({ preferences = {} }) {
-  const chartData = useMemo(() => {
-    const res = convertDataToChart(preferences);
-    if (Array.isArray(res)) {
-      return res;
-    }
-    return [];
-  }, [preferences]);
+	const chartData = useMemo(() => {
+		const res = convertDataToChart(preferences);
+		if (Array.isArray(res)) {
+			return res;
+		}
+		return [];
+	}, [preferences]);
 
-  const primaryAxis = useMemo(
-    () => ({
-      getValue: (datum) => datum.primary,
-    }),
-    []
-  );
+	const primaryAxis = useMemo(
+		() => ({
+			getValue: (datum) => datum.primary,
+		}),
+		[]
+	);
 
-  const secondaryAxes = useMemo(
-    () => [
-      {
-        getValue: (datum) => datum.secondary,
-        stacked: true,
-      },
-    ],
-    []
-  );
+	const secondaryAxes = useMemo(
+		() => [
+			{
+				getValue: (datum) => datum.secondary,
+				stacked: true,
+			},
+		],
+		[]
+	);
 
-  return (
-    <>
-      <Box
-        sx={{
-          background: "#343434",
-          borderRadius: "4px",
-          marginTop: "15px",
-        }}
-      >
-        {chartData.length > 0 && (
-          <Chart
-            options={{
-              data: chartData,
-              primaryAxis,
-              secondaryAxes,
-            }}
-          />
-        )}
-      </Box>
-    </>
-  );
+	return (
+		<>
+			<Box
+				sx={{
+					margin: "4px",
+					background: "transparent",
+					borderRadius: "0 0 8px 8px",
+				}}
+			>
+				{chartData.length > 0 && (
+					<Chart
+						options={{
+							data: chartData,
+							primaryAxis,
+							secondaryAxes,
+						}}
+					/>
+				)}
+			</Box>
+		</>
+	);
 }

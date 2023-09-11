@@ -19,11 +19,9 @@ code {
   position: static !important;
 }
 
-.ReactChart .tickLabel {
-  fill: #fff !important;
-}
 
 
-.MuiTypography-root, .MuiButtonBase-root {
+.MuiTypography-root,
+.MuiButtonBase-root {
   font-family: 'Poppins' !important;
 }
