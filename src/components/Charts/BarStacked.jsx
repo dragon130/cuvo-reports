@@ -38,8 +38,6 @@ export default function BarStacked({ preferences = {} }) {
     []
   );
 
-  console.log("data >", data);
-  console.log("chartData >", chartData);
 
 
   return (

@@ -1,19 +1,35 @@
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
 
-const chartState = {
-	options: {},
-	series: [44, 55, 41, 17, 15],
-	labels: ["A", "B", "C", "D", "E"],
-};
 
-const Donut = ({ width = "100%" }) => {
+
+const Donut = ({ labels = [], series = [], width = "100%" }) => {
+	const state = {
+		options: {
+			labels: labels,
+			plotOptions: {
+				pie: {
+					donut: {
+						labels: {
+							show: true,
+							total: {
+								showAlways: true,
+								show: true
+							}
+						}
+					}
+				}
+			},
+		},
+		series: series,
+	};
+
 	return (
 		<Chart
-			options={chartState.options}
-			series={chartState.series}
+			options={state.options}
+			series={state.series}
 			type="donut"
-			width={width}
+			height={385}
 		/>
 	);
 };

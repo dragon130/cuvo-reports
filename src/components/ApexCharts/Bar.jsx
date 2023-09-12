@@ -1,30 +1,28 @@
-import React, { Component } from "react";
+import React from "react";
 import Chart from "react-apexcharts";
 
-const chartState = {
-	options: {
-		chart: {
-			id: "basic-bar",
-		},
-		xaxis: {
-			categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
-		},
-	},
-	series: [
-		{
-			name: "series-1",
-			data: [30, 40, 45, 50, 49, 60, 70, 91],
-		},
-	],
-};
+const Bar = ({ categories = [], series = [], width = "100%" }) => {
 
-const Bar = ({ width = "100%" }) => {
+	const state = {
+		options: {
+			colors: ["#038229", "#76d43b", "#f5c61b", "#fa7c28", "#e61919"],
+			chart: {
+				id: "basic-bar",
+			},
+			xaxis: {
+				categories: categories,
+			},
+		},
+		series: series,
+	};
+
+
 	return (
 		<Chart
-			options={chartState.options}
-			series={chartState.series}
+			options={state.options}
+			series={state.series}
 			type="bar"
-			width={width}
+			height={372}
 		/>
 	);
 };
